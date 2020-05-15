@@ -1,4 +1,4 @@
-package com.miraclekang.clouddemo;
+package com.miraclekang.clouddemo.identity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 /**
  * Specified here
  *
- * @author kangliqi
+ * @author Miracle Kang
  * @date 2020/5/15
  */
 @SpringBootApplication

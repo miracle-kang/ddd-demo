@@ -53,5 +53,10 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.miraclekang.microservice</groupId>
+            <artifactId>infrastructure</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
