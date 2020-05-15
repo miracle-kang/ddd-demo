@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: nameRoot
+          uri: lb://api/identity
+          predicates:
+            - Path=/api/identity/**
+          filters:
+            - RewritePath=/api/identity(?<segment>.*), $\{segment}
