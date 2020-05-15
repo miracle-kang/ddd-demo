@@ -1,6 +1,7 @@
 package com.miraclekang.clouddemo.infrastructure.domain;
 
 import lombok.*;
+import org.apache.commons.lang3.Validate;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -18,6 +19,8 @@ public abstract class AbstractId implements Serializable {
     private String id;
 
     protected AbstractId(String anId) {
+        Validate.notBlank(anId, "ID must not be blank string.");
+
         this.id = anId;
     }
 }

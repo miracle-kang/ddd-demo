@@ -17,10 +17,11 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>api-gateway</module>
-        <module>identity-access</module>
         <module>infrastructure</module>
         <module>config-server</module>
         <module>service-registry</module>
+        <module>identity</module>
+        <module>access</module>
     </modules>
 
     <properties>
