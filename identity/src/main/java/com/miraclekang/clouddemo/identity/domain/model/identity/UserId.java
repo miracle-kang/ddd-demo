@@ -1,4 +1,4 @@
-package com.miraclekang.clouddemo.identity.domain.model;
+package com.miraclekang.clouddemo.identity.domain.model.identity;
 
 import com.miraclekang.clouddemo.infrastructure.domain.AbstractId;
 import lombok.AccessLevel;
@@ -8,9 +8,9 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class GroupId extends AbstractId {
+public class UserId extends AbstractId {
 
-    public GroupId(String anId) {
+    public UserId(String anId) {
         super(anId);
     }
 }

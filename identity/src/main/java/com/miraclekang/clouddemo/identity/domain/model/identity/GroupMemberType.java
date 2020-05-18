@@ -1,4 +1,4 @@
-package com.miraclekang.clouddemo.access.domain.model.licence;
+package com.miraclekang.clouddemo.identity.domain.model.identity;
 
 public enum GroupMemberType {
 

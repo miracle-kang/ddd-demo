@@ -3,17 +3,13 @@ package com.miraclekang.clouddemo.infrastructure.jackson;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.ifreecomm.education.infrastructure.factory.ObjectMapperFactory;
+import com.miraclekang.clouddemo.infrastructure.factory.ObjectMapperFactory;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-
-/**
- * Created by shuzhiqiang on 2017-2-13.
- */
 
 public class CustomLocalDateTimeSerializer extends com.fasterxml.jackson.databind.JsonSerializer<LocalDateTime> {
 
