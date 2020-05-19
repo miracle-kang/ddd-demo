@@ -3,3 +3,5 @@ server:
 
 grpc:
   enabled: true
+  server:
+    port: 0

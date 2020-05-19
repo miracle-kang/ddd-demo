@@ -3,3 +3,9 @@ server:
 
 grpc:
   enabled: true
+  client:
+    tenant-license-service:
+      address: access
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext

@@ -5,12 +5,9 @@ option java_outer_classname = "LicenseProto";
 option java_package = "com.miraclekang.clouddemo.infrastructure.grpc.access";
 
 import "google/protobuf/struct.proto";
+import "common.proto";
+
 
 service TenantLicenseService {
-    rpc isTenantLicense (TenantId) returns (google.protobuf.Value) {
-    }
-}
-
-message TenantId {
-    string id = 1;
+    rpc isTenantLicense (IdentityRequest) returns (google.protobuf.Value);
 }
