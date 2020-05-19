@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 public class Person extends EntityBase {
 
     private TenantId tenantId;
-    @OneToOne(mappedBy = "userId")
+    @OneToOne(mappedBy = "person")
     private User user;
     private FullName name;
     private ContactInformation contact;

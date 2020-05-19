@@ -13,6 +13,7 @@ public class LicenseService {
      * @return
      */
     public Boolean isTenantLicense(TenantId tenantId) {
+        System.out.println("Receive request, " + tenantId.getId());
         return true;
     }
 }

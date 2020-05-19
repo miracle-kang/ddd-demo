@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.Validate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,7 +23,8 @@ public class User extends EntityBase {
     private String password;
     private Enablement enablement;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "personId")
     private Person person;
 
     protected User(TenantId tenantId, UserId userId, String username, String password, Enablement enablement, Person person) {

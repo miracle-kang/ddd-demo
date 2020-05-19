@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TenantLicenseGRpcClient implements TenantLicenseService {
 
-    @GrpcClient("tenant-license-service")
+    @GrpcClient("access-service")
     private TenantLicenseServiceGrpc.TenantLicenseServiceBlockingStub tenantLicenseServiceStub;
 
     @Override
