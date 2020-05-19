@@ -54,6 +54,11 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
         <!-- Java JWT: JSON Web Token for Java and Android -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

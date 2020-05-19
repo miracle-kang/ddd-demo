@@ -1,10 +1,18 @@
 server:
   port: 30001
 
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+
 grpc:
   enabled: true
   client:
-    tenant-license-service:
+    access-service:
       address: discovery:///access
       enableKeepAlive: true
       keepAliveWithoutCalls: true

@@ -1,6 +1,14 @@
 server:
   port: 30002
 
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+
 grpc:
   enabled: true
   server:

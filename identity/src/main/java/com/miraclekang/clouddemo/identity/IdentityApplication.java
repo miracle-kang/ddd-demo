@@ -11,10 +11,10 @@ import javax.persistence.PersistenceContext;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class IdentityAccessApplication {
+public class IdentityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(IdentityAccessApplication.class, args);
+        SpringApplication.run(IdentityApplication.class, args);
     }
 
     @PersistenceContext
