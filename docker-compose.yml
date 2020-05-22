@@ -1,0 +1,116 @@
+version: '3.8'
+
+volumes:
+  mysql:
+
+networks:
+  default:
+    name: cloud-demo-network
+    driver: bridge
+
+services:
+  mysql:
+    image: mysql:8.0.20
+    restart: always
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ONETIME_PASSWORD=yes
+      - MYSQL_USER=xxx
+      - MYSQL_PASSWORD=xxx
+      - MYSQL_DATABASE=cloud-demo
+    networks:
+      cloud-demo-network: {}
+    ports:
+      - "127.0.0.1:3306:3306"
+
+  config-server:
+    build:
+      dockerfile: Dockerfile
+      context: ./config-server
+    image: miracle/spring-cloud-configserver:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - GIT_URI=https://github.com/kangliqi/cloud-demo
+      - GIT_SEARCH_PATHS=.cloud-demo-config
+      - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    networks:
+      cloud-demo-network: {}
+    ports:
+      - "127.0.0.1:8888:8888"
+
+  service-registry:
+    build:
+      dockerfile: Dockerfile
+      context: ./service-registry
+    image: miracle/spring-cloud-serviceregistry:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      cloud-demo-network: {}
+    depends_on:
+      - config-server
+    ports:
+      - "127.0.0.1:8741:8741"
+
+  zipkin:
+    image: openzipkin/zipkin:2.21.1
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      cloud-demo-network: {}
+    ports:
+      - "127.0.0.1:9411:9411"
+
+  access-service:
+    build:
+      dockerfile: Dockerfile
+      context: ./access
+    image: miracle/cloud-demo-access:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    networks:
+      cloud-demo-network: {}
+    depends_on:
+      - config-server
+      - service-registry
+      - zipkin
+
+  identity-service:
+    build:
+      dockerfile: Dockerfile
+      context: ./identity
+    image: miracle/cloud-demo-identity:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    networks:
+      cloud-demo-network: {}
+    depends_on:
+      - config-server
+      - service-registry
+      - zipkin
+
+  api-gateway:
+    build:
+      dockerfile: Dockerfile
+      context: ./api-gateway
+    image: miracle/cloud-demo-apigateway:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    networks:
+      cloud-demo-network: {}
+    depends_on:
+      - access-service
+      - identity-service
+    ports:
+      - "8080:8080"
