@@ -20,12 +20,10 @@ public class Person extends EntityBase {
     private FullName name;
     private ContactInformation contact;
 
-    public Person(TenantId tenantId, User user, FullName name, ContactInformation contact) {
+    public Person(TenantId tenantId, FullName name, ContactInformation contact) {
         Validate.notNull(tenantId, "The tenantId is required.");
-        Validate.notNull(user, "The user is required.");
 
         this.tenantId = tenantId;
-        this.user = user;
         this.name = name;
         this.contact = contact;
     }
@@ -38,5 +36,9 @@ public class Person extends EntityBase {
     public void changeContact(ContactInformation contact) {
         Validate.notNull(contact, "The contact is required.");
         this.contact = contact;
+    }
+
+    void internalSetUser(User user) {
+        this.user = user;
     }
 }

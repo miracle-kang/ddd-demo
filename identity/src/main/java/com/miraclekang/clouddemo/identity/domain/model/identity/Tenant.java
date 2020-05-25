@@ -41,7 +41,11 @@ public class Tenant extends EntityBase {
      */
     public User registerUser(String username, String password, Enablement enablement, Person person,
                              TenantLicenseService tenantLicenseService) {
-        Validate.isTrue(tenantLicenseService.isTenantLicense(tenantId), "Tenant license expired.");
+
+        // Check tenant license if available
+        if (tenantLicenseService != null) {
+            Validate.isTrue(tenantLicenseService.isTenantLicense(tenantId), "Tenant license expired.");
+        }
 
         User user = new User(
                 this.tenantId,

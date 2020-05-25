@@ -41,5 +41,9 @@ public class User extends EntityBase {
         this.password = password;
         this.enablement = enablement;
         this.person = person;
+
+        person.internalSetUser(this);
     }
+
+
 }

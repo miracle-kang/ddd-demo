@@ -1,5 +1,6 @@
 package com.miraclekang.clouddemo.access.domain.model.permission;
 
+import com.miraclekang.clouddemo.access.domain.model.identity.TenantId;
 import com.miraclekang.clouddemo.infrastructure.domain.EntityBase;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Role extends EntityBase {
 
+    private TenantId tenantId;
     private RoleId roleId;
     private String name;
     private String description;
@@ -28,7 +30,8 @@ public class Role extends EntityBase {
     @JoinColumn(name = "roleId")
     private Set<Permission> permissions = new LinkedHashSet<>();
 
-    public Role(RoleId roleId, String name, String description, List<Permission> permissions) {
+    public Role(TenantId tenantId, RoleId roleId, String name, String description, List<Permission> permissions) {
+        Validate.notNull(tenantId, "Tenant id must be provided.");
         Validate.notNull(roleId, "Role id must be provided.");
         Validate.notBlank(name, "Role name must be provided.");
 
