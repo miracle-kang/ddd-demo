@@ -1,4 +1,4 @@
-package com.miraclekang.clouddemo.identity;
+package com.miraclekang.clouddemo.serviceregistry;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

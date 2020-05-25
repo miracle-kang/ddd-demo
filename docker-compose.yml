@@ -39,7 +39,7 @@ services:
     networks:
       cloud-demo-network: {}
     ports:
-      - "127.0.0.1:8761:8761"
+      - "0.0.0.0:8761:8761"
 
   config-server:
     build:
@@ -55,7 +55,7 @@ services:
     networks:
       cloud-demo-network: {}
     ports:
-      - "127.0.0.1:8888:8888"
+      - "0.0.0.0:8888:8888"
     depends_on:
       - service-registry
     links:
@@ -69,7 +69,7 @@ services:
     networks:
       cloud-demo-network: {}
     ports:
-      - "127.0.0.1:9411:9411"
+      - "0.0.0.0:9411:9411"
 
   access-service:
     build:
@@ -81,6 +81,7 @@ services:
       - TZ=Asia/Shanghai
       - CONFIG_URI=http://config-server:8888
       - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+      - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
       cloud-demo-network: {}
     depends_on:
@@ -104,6 +105,7 @@ services:
       - TZ=Asia/Shanghai
       - CONFIG_URI=http://config-server:8888
       - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+      - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
       cloud-demo-network: {}
     depends_on:
@@ -126,6 +128,7 @@ services:
       - TZ=Asia/Shanghai
       - CONFIG_URI=http://config-server:8888
       - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+      - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
       cloud-demo-network: {}
     depends_on:
