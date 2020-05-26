@@ -1,4 +1,4 @@
-package com.miraclekang.clouddemo.identity;
+package com.miraclekang.clouddemo.access;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,17 +20,17 @@ public class SwaggerApiConfig {
                 .select()
                 .paths(PathSelectors.any())
                 .build()
-                .groupName("identity")
+                .groupName("access")
                 .pathMapping("/")
                 .apiInfo(new ApiInfoBuilder()
-                        .title("身份认证服务")
+                        .title("访问控制服务")
                         .version("V1.0")
-                        .description("身份认证服务")
+                        .description("访问控制服务")
                         .build())
                 .pathProvider(new AbstractPathProvider() {
                     @Override
                     protected String applicationPath() {
-                        return "/api/identity/";
+                        return "/api/access/";
                     }
 
                     @Override
