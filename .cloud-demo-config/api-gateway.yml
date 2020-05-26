@@ -5,26 +5,31 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: identity-service
-          uri: lb://identity/api/identity
-          predicates:
-            - Path=/api/identity/**
-        - id: identity-swagger
-          uri: lb://identity/
-          predicates:
-            - Path=/v2/api-docs
-            - Query=group, identity
-          filters:
-            - SetPath=/v2/api-docs
+      - id: identity-service
+        uri: lb://identity/api/identity
+        predicates:
+        - Path=/api/identity/**
+      - id: identity-swagger
+        uri: lb://identity/
+        predicates:
+        - Path=/identity/v2/api-docs
+        filters:
+        - SetPath=/v2/api-docs
 
-        - id: access-service
-          uri: lb://access/api/access
-          predicates:
-            - Path=/api/access/**
-        - id: access-swagger
-          uri: lb://access/
-          predicates:
-            - Path=/v2/api-docs
-            - Query=group, access
-          filters:
-            - SetPath=/v2/api-docs
+      - id: access-service
+        uri: lb://access/api/access
+        predicates:
+        - Path=/api/access/**
+      - id: access-swagger
+        uri: lb://access/
+        predicates:
+        - Path=/access/v2/api-docs
+        filters:
+        - SetPath=/v2/api-docs
+
+      - id: swagger-ui
+        uri: lb://swagger/
+        predicates:
+        - Path=/v2/api-docs/**
+        - Path=/swagger-ui
+        - Path=/swagger-resources

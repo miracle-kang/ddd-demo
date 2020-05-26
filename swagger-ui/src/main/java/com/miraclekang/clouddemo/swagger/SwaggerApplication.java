@@ -1,7 +1,8 @@
-package com.miraclekang.clouddemo.apigateway.swagger;
+package com.miraclekang.clouddemo.swagger;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.schema.ModelRef;
@@ -14,22 +15,20 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Specified here
- *
- * @author kangliqi
- * @date 2020/5/26
- */
 @EnableSwagger2
-@Configuration
-public class SwaggerApiConfig {
+@SpringBootApplication
+public class SwaggerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SwaggerApplication.class, args);
+    }
 
     @Bean
     public Docket identityApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .enable(true)
                 .groupName("identity")
-                .pathMapping("/")
+                .pathMapping("/identity")
                 .globalOperationParameters(parameters())
                 .apiInfo(apiInfo("身份认证服务", "V1.0", "身份认证服务"));
     }
@@ -39,7 +38,7 @@ public class SwaggerApiConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .enable(true)
                 .groupName("access")
-                .pathMapping("/")
+                .pathMapping("/access")
                 .globalOperationParameters(parameters())
                 .apiInfo(apiInfo("访问控制服务", "V1.0", "访问控制服务"));
     }
