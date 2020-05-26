@@ -34,6 +34,7 @@ public class SwaggerApiConfig {
                 .apiInfo(apiInfo("身份认证服务", "V1.0", "身份认证服务"));
     }
 
+    @Bean
     public Docket accessApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .enable(true)
