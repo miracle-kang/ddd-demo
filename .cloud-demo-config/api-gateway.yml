@@ -32,4 +32,4 @@ spring:
       - id: swagger-ui
         uri: lb://swagger/
         predicates:
-        - Path=/v2/api-docs**,/swagger-ui**,/swagger-resources**,/webjars/**
+        - Path=/swagger-ui**,/swagger-resources**,/webjars/**
