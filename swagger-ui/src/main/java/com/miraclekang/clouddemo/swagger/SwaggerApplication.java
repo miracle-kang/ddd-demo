@@ -28,7 +28,7 @@ public class SwaggerApplication {
         return new Docket(DocumentationType.SWAGGER_2)
                 .enable(true)
                 .groupName("identity")
-                .pathMapping("/identity")
+                .pathMapping("/")
                 .globalOperationParameters(parameters())
                 .apiInfo(apiInfo("身份认证服务", "V1.0", "身份认证服务"));
     }
@@ -38,7 +38,7 @@ public class SwaggerApplication {
         return new Docket(DocumentationType.SWAGGER_2)
                 .enable(true)
                 .groupName("access")
-                .pathMapping("/access")
+                .pathMapping("/")
                 .globalOperationParameters(parameters())
                 .apiInfo(apiInfo("访问控制服务", "V1.0", "访问控制服务"));
     }
