@@ -9,21 +9,21 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.27.235.0/24
+      - subnet: 172.27.235.0/24
 
 services:
   mysql:
     image: mysql:8.0.20
     restart: always
     volumes:
-      - mysql:/var/lib/mysql
+    - mysql:/var/lib/mysql
     environment:
-      - TZ=Asia/Shanghai
-      - MYSQL_ONETIME_PASSWORD=yes
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_USER=cloud
-      - MYSQL_PASSWORD=cloud-demo
-      - MYSQL_DATABASE=cloud-demo
+    - TZ=Asia/Shanghai
+    - MYSQL_ONETIME_PASSWORD=yes
+    - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    - MYSQL_USER=cloud
+    - MYSQL_PASSWORD=cloud-demo
+    - MYSQL_DATABASE=cloud-demo
     networks:
       cloud-demo-network: {}
 
@@ -34,12 +34,12 @@ services:
     image: miracle/spring-cloud-serviceregistry:latest
     restart: always
     environment:
-      - TZ=Asia/Shanghai
-      - CONFIG_URI=http://config-server:8888
+    - TZ=Asia/Shanghai
+    - CONFIG_URI=http://config-server:8888
     networks:
       cloud-demo-network: {}
     ports:
-      - "0.0.0.0:8761:8761"
+    - "0.0.0.0:8761:8761"
 
   config-server:
     build:
@@ -48,26 +48,26 @@ services:
     image: miracle/spring-cloud-configserver:latest
     restart: always
     environment:
-      - TZ=Asia/Shanghai
-      - GIT_URI=https://github.com/kangliqi/cloud-demo
-      - GIT_SEARCH_PATHS=.cloud-demo-config
-      - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    - TZ=Asia/Shanghai
+    - GIT_URI=https://github.com/kangliqi/cloud-demo
+    - GIT_SEARCH_PATHS=.cloud-demo-config
+    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
     networks:
       cloud-demo-network: {}
     ports:
-      - "0.0.0.0:8888:8888"
+    - "0.0.0.0:8888:8888"
     depends_on:
-      - service-registry
+    - service-registry
 
   zipkin:
     image: openzipkin/zipkin:2.21.1
     restart: always
     environment:
-      - TZ=Asia/Shanghai
+    - TZ=Asia/Shanghai
     networks:
       cloud-demo-network: {}
     ports:
-      - "0.0.0.0:9411:9411"
+    - "0.0.0.0:9411:9411"
 
   access-service:
     build:
@@ -76,17 +76,17 @@ services:
     image: miracle/cloud-demo-access:latest
     restart: always
     environment:
-      - TZ=Asia/Shanghai
-      - CONFIG_URI=http://config-server:8888
-      - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
-      - ZIPKIN_BASE_URL=http://zipkin:9411/
+    - TZ=Asia/Shanghai
+    - CONFIG_URI=http://config-server:8888
+    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
       cloud-demo-network: {}
     depends_on:
-      - config-server
-      - service-registry
-      - zipkin
-      - mysql
+    - config-server
+    - service-registry
+    - zipkin
+    - mysql
 
   identity-service:
     build:
@@ -95,16 +95,34 @@ services:
     image: miracle/cloud-demo-identity:latest
     restart: always
     environment:
-      - TZ=Asia/Shanghai
-      - CONFIG_URI=http://config-server:8888
-      - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
-      - ZIPKIN_BASE_URL=http://zipkin:9411/
+    - TZ=Asia/Shanghai
+    - CONFIG_URI=http://config-server:8888
+    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
       cloud-demo-network: {}
     depends_on:
-      - config-server
-      - service-registry
-      - zipkin
+    - config-server
+    - service-registry
+    - zipkin
+
+  swagger-service:
+    build:
+      dockerfile: Dockerfile
+      context: ./swagger-ui
+    image: miracle/cloud-demo-swagger:latest
+    restart: always
+    environment:
+    - TZ=Asia/Shanghai
+    - CONFIG_URI=http://config-server:8888
+    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    - ZIPKIN_BASE_URL=http://zipkin:9411/
+    networks:
+      cloud-demo-network: {}
+    depends_on:
+    - config-server
+    - service-registry
+    - zipkin
 
   api-gateway:
     build:
@@ -113,14 +131,14 @@ services:
     image: miracle/cloud-demo-apigateway:latest
     restart: always
     environment:
-      - TZ=Asia/Shanghai
-      - CONFIG_URI=http://config-server:8888
-      - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
-      - ZIPKIN_BASE_URL=http://zipkin:9411/
+    - TZ=Asia/Shanghai
+    - CONFIG_URI=http://config-server:8888
+    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+    - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
       cloud-demo-network: {}
     ports:
-      - "8080:8080"
+    - "8080:8080"
     depends_on:
-      - access-service
-      - identity-service
+    - access-service
+    - identity-service
