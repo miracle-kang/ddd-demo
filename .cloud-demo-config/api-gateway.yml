@@ -5,9 +5,26 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: nameRoot
-          uri: lb://api/identity
+        - id: identity-service
+          uri: lb://identity/api/identity
           predicates:
             - Path=/api/identity/**
+        - id: identity-swagger
+          uri: lb://identity/
+          predicates:
+            - Path=/v2/api-docs
+            - Query=group, identity
           filters:
-            - RewritePath=/api/identity(?<segment>.*), $\{segment}
+            - SetPath=/v2/api-docs
+
+        - id: access-service
+          uri: lb://access/api/access
+          predicates:
+            - Path=/api/access/**
+        - id: access-swagger
+          uri: lb://access/
+          predicates:
+            - Path=/v2/api-docs
+            - Query=group, access
+          filters:
+            - SetPath=/v2/api-docs
