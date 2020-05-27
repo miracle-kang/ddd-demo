@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.paths.AbstractPathProvider;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -26,18 +25,7 @@ public class SwaggerApiConfig {
                         .title("访问控制服务")
                         .version("V1.0")
                         .description("访问控制服务")
-                        .build())
-                .pathProvider(new AbstractPathProvider() {
-                    @Override
-                    protected String applicationPath() {
-                        return "/api/access/";
-                    }
-
-                    @Override
-                    protected String getDocumentationPath() {
-                        return "/";
-                    }
-                });
+                        .build());
     }
 }
 

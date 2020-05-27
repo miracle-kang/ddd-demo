@@ -26,18 +26,7 @@ public class SwaggerApiConfig {
                         .title("身份认证服务")
                         .version("V1.0")
                         .description("身份认证服务")
-                        .build())
-                .pathProvider(new AbstractPathProvider() {
-                    @Override
-                    protected String applicationPath() {
-                        return "/api/identity/";
-                    }
-
-                    @Override
-                    protected String getDocumentationPath() {
-                        return "/";
-                    }
-                });
+                        .build());
     }
 }
 
