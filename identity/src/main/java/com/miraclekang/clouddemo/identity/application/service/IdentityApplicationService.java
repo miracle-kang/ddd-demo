@@ -8,6 +8,7 @@ import com.miraclekang.clouddemo.identity.application.dto.TenantDto;
 import com.miraclekang.clouddemo.identity.domain.model.identity.*;
 import com.miraclekang.clouddemo.identity.domain.repository.TenantRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class IdentityApplicationService
@@ -23,6 +24,7 @@ public class IdentityApplicationService
     }
 
     @Override
+    @Transactional
     public TenantDto provisionTenant(ProvisionTenantCommand command) {
         Tenant tenant = tenantProvisioningService.provisionTenant(
                 command.getName(),
