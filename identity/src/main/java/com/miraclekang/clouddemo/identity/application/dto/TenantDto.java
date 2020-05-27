@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class TenantDto {
-    private TenantId tenantId;
+    private String tenantId;
     private String name;
     private String description;
 
@@ -17,7 +17,7 @@ public class TenantDto {
             return nullTenant();
         }
         return new TenantDto(
-                tenant.getTenantId(),
+                tenant.getTenantId().getId(),
                 tenant.getName(),
                 tenant.getDescription()
         );

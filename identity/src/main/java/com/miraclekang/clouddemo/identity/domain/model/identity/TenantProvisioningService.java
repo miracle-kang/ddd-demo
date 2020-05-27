@@ -39,7 +39,7 @@ public class TenantProvisioningService {
 
         // publish tenant provisioned event.
         DomainEventPublisher.instance()
-                .publish(new TenantProvisioned(tenant.getTenantId()));
+                .publish(new TenantProvisioned(tenant.getTenantId(), tenantName));
 
 
         User tenantAdmin = tenant.registerUser(

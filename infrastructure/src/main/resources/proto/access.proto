@@ -4,10 +4,47 @@ option java_multiple_files = true;
 option java_outer_classname = "LicenseProto";
 option java_package = "com.miraclekang.clouddemo.infrastructure.grpc.access";
 
-import "google/protobuf/struct.proto";
+//import "google/protobuf/struct.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 import "common.proto";
 
-
+//
+// Tenant License Service
+//
 service TenantLicenseService {
-    rpc isTenantLicense (IdentityRequest) returns (google.protobuf.Value);
+    rpc isTenantLicense (IdentityRequest) returns (google.protobuf.BoolValue);
+    rpc enableTenantLicense (EnableTenantLicenseRequest) returns (google.protobuf.Empty);
+    rpc disableTenantLicense (IdentityRequest) returns (google.protobuf.Empty);
+}
+
+message EnableTenantLicenseRequest {
+    string tenantId = 1;
+    google.protobuf.Timestamp expiredTime = 2;
+}
+
+//
+// Tenant Role Service
+//
+service TenantRoleService {
+    rpc provisionRole (ProvisionRoleRequest) returns (IdentityResponse);
+    rpc assignUserToRole (AssignUserToRoleRequest) returns (google.protobuf.Empty);
+    rpc userHasRole (UserHasRoleRequest) returns (google.protobuf.BoolValue);
+}
+
+message ProvisionRoleRequest {
+    string tenantId = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message AssignUserToRoleRequest {
+    string userId = 1;
+    string roleId = 2;
+}
+
+message UserHasRoleRequest {
+    string userId = 1;
+    string roleName = 2;
 }

@@ -22,9 +22,22 @@ public class Tenant extends EntityBase {
 
     public Tenant(TenantId tenantId, String name, String description) {
         Validate.notNull(tenantId, "The tenantId is required.");
-        Validate.notNull(name, "The tenant name is required.");
+        Validate.notBlank(name, "The tenant name is required.");
 
         this.tenantId = tenantId;
+        this.name = name;
+        this.description = description;
+    }
+
+    /**
+     * Change tenant info
+     *
+     * @param name        new tenant name
+     * @param description new tenant description
+     */
+    public void changeInfo(String name, String description) {
+        Validate.notBlank(name, "The tenant name is required.");
+
         this.name = name;
         this.description = description;
     }

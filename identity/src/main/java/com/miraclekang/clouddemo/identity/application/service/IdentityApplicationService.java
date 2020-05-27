@@ -3,6 +3,8 @@ package com.miraclekang.clouddemo.identity.application.service;
 import com.miraclekang.clouddemo.identity.application.TenantManagementService;
 import com.miraclekang.clouddemo.identity.application.UserPersionalService;
 import com.miraclekang.clouddemo.identity.application.UserRegisterService;
+import com.miraclekang.clouddemo.identity.application.command.ActivateTenantCommand;
+import com.miraclekang.clouddemo.identity.application.command.ChangeTenantInfoCommand;
 import com.miraclekang.clouddemo.identity.application.command.ProvisionTenantCommand;
 import com.miraclekang.clouddemo.identity.application.dto.TenantDto;
 import com.miraclekang.clouddemo.identity.domain.model.identity.*;
@@ -15,11 +17,14 @@ public class IdentityApplicationService
         implements UserRegisterService, UserPersionalService, TenantManagementService {
 
     private final TenantRepository tenantRepository;
+    private final TenantActivateService tenantActivateService;
     private final TenantProvisioningService tenantProvisioningService;
 
     public IdentityApplicationService(TenantRepository tenantRepository,
+                                      TenantActivateService tenantActivateService,
                                       TenantProvisioningService tenantProvisioningService) {
         this.tenantRepository = tenantRepository;
+        this.tenantActivateService = tenantActivateService;
         this.tenantProvisioningService = tenantProvisioningService;
     }
 
@@ -42,5 +47,50 @@ public class IdentityApplicationService
         );
 
         return TenantDto.from(tenant);
+    }
+
+    @Override
+    @Transactional
+    public TenantDto changeTenantInfo(String tenantId, ChangeTenantInfoCommand command) {
+        Tenant tenant = existingTenant(tenantId);
+
+        tenant.changeInfo(command.getName(), command.getDescription());
+        return TenantDto.from(tenant);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public TenantDto tenant(String tenantId) {
+        Tenant tenant = existingTenant(tenantId);
+
+        return TenantDto.from(tenant);
+    }
+
+    @Override
+    @Transactional
+    public void activateTenant(String tenantId, ActivateTenantCommand command) {
+        Tenant tenant = existingTenant(tenantId);
+
+        tenantActivateService.activateTenant(tenant,
+                command.getExpiredTime());
+    }
+
+    @Override
+    @Transactional
+    public void deactivateTenant(String tenantId) {
+        Tenant tenant = existingTenant(tenantId);
+
+        tenantActivateService.deactivateTenant(tenant);
+    }
+
+    private Tenant existingTenant(String aTenantId) {
+        Tenant tenant = tenantRepository.findByTenantId(new TenantId(aTenantId));
+
+        if (tenant == null) {
+            throw new IllegalArgumentException(
+                    "Tenant does not exist for: " + aTenantId);
+        }
+
+        return tenant;
     }
 }
