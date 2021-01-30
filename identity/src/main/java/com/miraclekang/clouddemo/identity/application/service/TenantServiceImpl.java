@@ -1,8 +1,7 @@
 package com.miraclekang.clouddemo.identity.application.service;
 
+import com.miraclekang.clouddemo.identity.application.TenantAdministratorService;
 import com.miraclekang.clouddemo.identity.application.TenantManagementService;
-import com.miraclekang.clouddemo.identity.application.UserPersionalService;
-import com.miraclekang.clouddemo.identity.application.UserRegisterService;
 import com.miraclekang.clouddemo.identity.application.command.ActivateTenantCommand;
 import com.miraclekang.clouddemo.identity.application.command.ChangeTenantInfoCommand;
 import com.miraclekang.clouddemo.identity.application.command.ProvisionTenantCommand;
@@ -13,19 +12,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class IdentityApplicationService
-        implements UserRegisterService, UserPersionalService, TenantManagementService {
+public class TenantServiceImpl implements TenantManagementService, TenantAdministratorService {
 
     private final TenantRepository tenantRepository;
     private final TenantActivateService tenantActivateService;
     private final TenantProvisioningService tenantProvisioningService;
 
-    public IdentityApplicationService(TenantRepository tenantRepository,
-                                      TenantActivateService tenantActivateService,
-                                      TenantProvisioningService tenantProvisioningService) {
+    public TenantServiceImpl(TenantRepository tenantRepository,
+                             TenantActivateService tenantActivateService,
+                             TenantProvisioningService tenantProvisioningService) {
         this.tenantRepository = tenantRepository;
         this.tenantActivateService = tenantActivateService;
         this.tenantProvisioningService = tenantProvisioningService;
+    }
+
+    public TenantServiceImpl() {
     }
 
     @Override
@@ -83,7 +84,7 @@ public class IdentityApplicationService
         tenantActivateService.deactivateTenant(tenant);
     }
 
-    private Tenant existingTenant(String aTenantId) {
+    protected Tenant existingTenant(String aTenantId) {
         Tenant tenant = tenantRepository.findByTenantId(new TenantId(aTenantId));
 
         if (tenant == null) {
