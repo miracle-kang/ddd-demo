@@ -1,6 +1,6 @@
-# Spring Cloud Demo
+# DDD(Domain-Drive Design) Demo
 
-Spring cloud 入门演示项目
+DDD演示项目，基于Spring Cloud实现
 
 ## service-registry
 
