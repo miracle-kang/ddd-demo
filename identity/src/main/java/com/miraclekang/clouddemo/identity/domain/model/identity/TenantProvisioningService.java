@@ -2,8 +2,6 @@ package com.miraclekang.clouddemo.identity.domain.model.identity;
 
 import com.miraclekang.clouddemo.identity.domain.model.access.RoleId;
 import com.miraclekang.clouddemo.identity.domain.model.access.TenantRoleService;
-import com.miraclekang.clouddemo.identity.domain.repository.TenantRepository;
-import com.miraclekang.clouddemo.identity.domain.repository.UserRepository;
 import com.miraclekang.clouddemo.infrastructure.domain.DomainEventPublisher;
 import com.miraclekang.clouddemo.infrastructure.domain.model.Enablement;
 import com.miraclekang.clouddemo.infrastructure.utils.IdentifyUtils;

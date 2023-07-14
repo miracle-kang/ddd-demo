@@ -1,4 +1,4 @@
-package com.miraclekang.clouddemo.identity.domain.repository;
+package com.miraclekang.clouddemo.identity.domain.model.identity;
 
 import com.miraclekang.clouddemo.identity.domain.model.identity.Tenant;
 import com.miraclekang.clouddemo.identity.domain.model.identity.TenantId;

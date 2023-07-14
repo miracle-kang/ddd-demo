@@ -49,7 +49,7 @@ services:
     restart: always
     environment:
     - TZ=Asia/Shanghai
-    - GIT_URI=https://github.com/kangliqi/cloud-demo
+    - GIT_URI=https://github.com/miracle-kang/ddd-demo
     - GIT_SEARCH_PATHS=.cloud-demo-config
     - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
     networks:

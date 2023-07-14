@@ -11,5 +11,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/kangliqi/cloud-demo
+          uri: https://github.com/miracle-kang/ddd-demo
           searchPaths: .cloud-demo-config

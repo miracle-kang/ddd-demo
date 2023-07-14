@@ -7,7 +7,7 @@ import com.miraclekang.clouddemo.identity.application.command.ChangeTenantInfoCo
 import com.miraclekang.clouddemo.identity.application.command.ProvisionTenantCommand;
 import com.miraclekang.clouddemo.identity.application.dto.TenantDto;
 import com.miraclekang.clouddemo.identity.domain.model.identity.*;
-import com.miraclekang.clouddemo.identity.domain.repository.TenantRepository;
+import com.miraclekang.clouddemo.identity.domain.model.identity.TenantRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
