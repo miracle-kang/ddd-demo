@@ -11,6 +11,14 @@ networks:
       config:
       - subnet: 172.27.235.0/24
 
+x-common-environments: &common-environments
+  TZ: Asia/Shanghai
+
+x-mysql-environments: &mysql-environments
+  MYSQL_USER: cloud
+  MYSQL_PASSWORD: ddd-demo
+  MYSQL_DATABASE: ddd-demo
+
 services:
   mysql:
     image: mysql:8.0.20
@@ -18,12 +26,9 @@ services:
     volumes:
     - mysql:/var/lib/mysql
     environment:
-    - TZ=Asia/Shanghai
-    - MYSQL_ONETIME_PASSWORD=yes
-    - MYSQL_RANDOM_ROOT_PASSWORD=yes
-    - MYSQL_USER=cloud
-    - MYSQL_PASSWORD=ddd-demo
-    - MYSQL_DATABASE=ddd-demo
+      <<: *common-environments
+      <<: *mysql-environments
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
     networks:
       ddd-demo-network: {}
 
@@ -34,8 +39,8 @@ services:
     image: miracle/spring-cloud-serviceregistry:latest
     restart: always
     environment:
-    - TZ=Asia/Shanghai
-    - CONFIG_URI=http://config-server:8888
+      <<: *common-environments
+      CONFIG_URI: http://config-server:8888
     networks:
       ddd-demo-network: {}
     ports:
@@ -48,10 +53,12 @@ services:
     image: miracle/spring-cloud-configserver:latest
     restart: always
     environment:
-    - TZ=Asia/Shanghai
-    - GIT_URI=https://github.com/miracle-kang/ddd-demo
-    - GIT_SEARCH_PATHS=.ddd-demo-config
-    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
+      <<: *common-environments
+      GIT_URI: https://github.com/miracle-kang/ddd-demo
+      GIT_SEARCH_PATHS: .ddd-demo-config
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+      PROXY_HOST: 192.168.74.24
+      PROXY_PORT: 1087
     networks:
       ddd-demo-network: {}
     ports:
@@ -63,7 +70,7 @@ services:
     image: openzipkin/zipkin:2.21.1
     restart: always
     environment:
-    - TZ=Asia/Shanghai
+      <<: *common-environments
     networks:
       ddd-demo-network: {}
     ports:
@@ -76,10 +83,12 @@ services:
     image: miracle/ddd-demo-access:latest
     restart: always
     environment:
-    - TZ=Asia/Shanghai
-    - CONFIG_URI=http://config-server:8888
-    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
-    - ZIPKIN_BASE_URL=http://zipkin:9411/
+      <<: *common-environments
+      <<: *mysql-environments
+      MYSQL_URL: "mysql://mysql:3306"
+      CONFIG_URI: http://config-server:8888
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+      ZIPKIN_BASE_URL: http://zipkin:9411/
     networks:
       ddd-demo-network: {}
     depends_on:
@@ -95,10 +104,12 @@ services:
     image: miracle/ddd-demo-identity:latest
     restart: always
     environment:
-    - TZ=Asia/Shanghai
-    - CONFIG_URI=http://config-server:8888
-    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
-    - ZIPKIN_BASE_URL=http://zipkin:9411/
+      <<: *common-environments
+      <<: *mysql-environments
+      MYSQL_URL: "mysql://mysql:3306"
+      CONFIG_URI: http://config-server:8888
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+      ZIPKIN_BASE_URL: http://zipkin:9411/
     networks:
       ddd-demo-network: {}
     depends_on:
@@ -113,10 +124,10 @@ services:
     image: miracle/ddd-demo-swagger:latest
     restart: always
     environment:
-    - TZ=Asia/Shanghai
-    - CONFIG_URI=http://config-server:8888
-    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
-    - ZIPKIN_BASE_URL=http://zipkin:9411/
+      <<: *common-environments
+      CONFIG_URI: http://config-server:8888
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+      ZIPKIN_BASE_URL: http://zipkin:9411/
     networks:
       ddd-demo-network: {}
     depends_on:
@@ -131,10 +142,10 @@ services:
     image: miracle/ddd-demo-apigateway:latest
     restart: always
     environment:
-    - TZ=Asia/Shanghai
-    - CONFIG_URI=http://config-server:8888
-    - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
-    - ZIPKIN_BASE_URL=http://zipkin:9411/
+      <<: *common-environments
+      CONFIG_URI: http://config-server:8888
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+      ZIPKIN_BASE_URL: http://zipkin:9411/
     networks:
       ddd-demo-network: {}
     ports:

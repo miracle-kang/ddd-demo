@@ -5,4 +5,3 @@ COPY    target/identity-1.0-SNAPSHOT.jar /
 
 EXPOSE  30001
 ENTRYPOINT  ["sh", "/entrypoint.sh"]
-CMD     ["/identity-1.0-SNAPSHOT.jar"]

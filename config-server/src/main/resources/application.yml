@@ -13,7 +13,3 @@ spring:
         git:
           uri: https://github.com/miracle-kang/ddd-demo
           searchPaths: .ddd-demo-config
-          proxy:
-            https:
-              host: 192.168.74.24
-              port: 1087
