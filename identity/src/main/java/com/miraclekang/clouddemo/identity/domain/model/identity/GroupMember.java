@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GroupMember extends IdentifiedValueObject {
 
     private TenantId tenantId;

@@ -26,9 +26,6 @@ public class TenantServiceImpl implements TenantManagementService, TenantAdminis
         this.tenantProvisioningService = tenantProvisioningService;
     }
 
-    public TenantServiceImpl() {
-    }
-
     @Override
     @Transactional
     public TenantDto provisionTenant(ProvisionTenantCommand command) {

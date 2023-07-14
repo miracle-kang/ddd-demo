@@ -8,7 +8,7 @@ DDD演示项目，基于Spring Cloud实现
 
 ## config-server
 
-服务配置中心，配置文件基于本项目`.cloud-demo-config`目录
+服务配置中心，配置文件基于本项目`.ddd-demo-config`目录
 
 ## api-gateway
 

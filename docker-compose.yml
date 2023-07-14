@@ -4,8 +4,8 @@ volumes:
   mysql:
 
 networks:
-  cloud-demo-network:
-    name: cloud-demo-network
+  ddd-demo-network:
+    name: ddd-demo-network
     ipam:
       driver: default
       config:
@@ -22,10 +22,10 @@ services:
     - MYSQL_ONETIME_PASSWORD=yes
     - MYSQL_RANDOM_ROOT_PASSWORD=yes
     - MYSQL_USER=cloud
-    - MYSQL_PASSWORD=cloud-demo
-    - MYSQL_DATABASE=cloud-demo
+    - MYSQL_PASSWORD=ddd-demo
+    - MYSQL_DATABASE=ddd-demo
     networks:
-      cloud-demo-network: {}
+      ddd-demo-network: {}
 
   service-registry:
     build:
@@ -37,7 +37,7 @@ services:
     - TZ=Asia/Shanghai
     - CONFIG_URI=http://config-server:8888
     networks:
-      cloud-demo-network: {}
+      ddd-demo-network: {}
     ports:
     - "0.0.0.0:8761:8761"
 
@@ -50,10 +50,10 @@ services:
     environment:
     - TZ=Asia/Shanghai
     - GIT_URI=https://github.com/miracle-kang/ddd-demo
-    - GIT_SEARCH_PATHS=.cloud-demo-config
+    - GIT_SEARCH_PATHS=.ddd-demo-config
     - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
     networks:
-      cloud-demo-network: {}
+      ddd-demo-network: {}
     ports:
     - "0.0.0.0:8888:8888"
     depends_on:
@@ -65,7 +65,7 @@ services:
     environment:
     - TZ=Asia/Shanghai
     networks:
-      cloud-demo-network: {}
+      ddd-demo-network: {}
     ports:
     - "0.0.0.0:9411:9411"
 
@@ -73,7 +73,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./access
-    image: miracle/cloud-demo-access:latest
+    image: miracle/ddd-demo-access:latest
     restart: always
     environment:
     - TZ=Asia/Shanghai
@@ -81,7 +81,7 @@ services:
     - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
     - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
-      cloud-demo-network: {}
+      ddd-demo-network: {}
     depends_on:
     - config-server
     - service-registry
@@ -92,7 +92,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./identity
-    image: miracle/cloud-demo-identity:latest
+    image: miracle/ddd-demo-identity:latest
     restart: always
     environment:
     - TZ=Asia/Shanghai
@@ -100,7 +100,7 @@ services:
     - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
     - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
-      cloud-demo-network: {}
+      ddd-demo-network: {}
     depends_on:
     - config-server
     - service-registry
@@ -110,7 +110,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./swagger-ui
-    image: miracle/cloud-demo-swagger:latest
+    image: miracle/ddd-demo-swagger:latest
     restart: always
     environment:
     - TZ=Asia/Shanghai
@@ -118,7 +118,7 @@ services:
     - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
     - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
-      cloud-demo-network: {}
+      ddd-demo-network: {}
     depends_on:
     - config-server
     - service-registry
@@ -128,7 +128,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./api-gateway
-    image: miracle/cloud-demo-apigateway:latest
+    image: miracle/ddd-demo-apigateway:latest
     restart: always
     environment:
     - TZ=Asia/Shanghai
@@ -136,7 +136,7 @@ services:
     - EUREKA_SERVICE_URL=http://service-registry:8761/eureka/
     - ZIPKIN_BASE_URL=http://zipkin:9411/
     networks:
-      cloud-demo-network: {}
+      ddd-demo-network: {}
     ports:
     - "8080:8080"
     depends_on:

@@ -8,4 +8,4 @@ spring:
       server:
         git:
           uri: https://github.com/miracle-kang/ddd-demo
-          searchPaths: .cloud-demo-config
+          searchPaths: .ddd-demo-config
