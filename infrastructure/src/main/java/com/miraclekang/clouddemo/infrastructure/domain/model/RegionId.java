@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Embeddable;
 
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RegionId extends AbstractId {
     public RegionId(String anId) {
         super(anId);

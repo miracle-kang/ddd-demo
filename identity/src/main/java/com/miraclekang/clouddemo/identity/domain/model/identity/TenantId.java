@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Embeddable;
 
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TenantId extends AbstractId {
 
     public TenantId(String anId) {

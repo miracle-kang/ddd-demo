@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DateTimeRange extends ValueObject implements Comparable<DateTimeRange> {
 
     private LocalDateTime start;

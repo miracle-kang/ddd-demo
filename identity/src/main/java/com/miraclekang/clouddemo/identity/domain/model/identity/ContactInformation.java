@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 
 @Getter
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ContactInformation extends ValueObject {
 
     private EmailAddress email;

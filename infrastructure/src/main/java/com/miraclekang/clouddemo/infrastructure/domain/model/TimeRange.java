@@ -17,7 +17,7 @@ import java.time.format.DateTimeParseException;
 
 @Getter
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TimeRange extends ValueObject implements Comparable<TimeRange> {
 
     private LocalTime start;

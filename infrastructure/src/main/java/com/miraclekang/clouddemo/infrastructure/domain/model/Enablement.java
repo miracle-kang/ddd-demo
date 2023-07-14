@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Embeddable
 @Getter
 @Setter(AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Enablement extends ValueObject {
 
     private Boolean enable;

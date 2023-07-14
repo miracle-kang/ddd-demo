@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Permission extends EntityBase {
 
     private PermissionId permissionId;

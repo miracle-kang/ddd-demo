@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter(AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class License extends EntityBase {
 
     private LicenseId licenseId;

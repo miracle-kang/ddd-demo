@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Person extends EntityBase {
 
     private TenantId tenantId;

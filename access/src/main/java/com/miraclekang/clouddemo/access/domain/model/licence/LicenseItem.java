@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.Validate;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LicenseItem extends IdentifiedValueObject {
 
     private ModuleId moduleId;
